@@ -15,6 +15,10 @@ public class EmployeeService {
 	EmployeeRepo empRepo;
 	
 	public List<Employee> findManagerByEmpId(Integer empId){
-		return empRepo.findByManager(empId);
+		return empRepo.findManager(empId);
 	}
+	public List<Employee> findIThelp(String location){
+		return empRepo.findIThelp(location);
+	}
+	
 }
