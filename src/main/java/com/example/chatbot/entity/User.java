@@ -1,8 +1,9 @@
 package com.example.chatbot.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 public class User {
@@ -12,7 +13,7 @@ public class User {
 	String empName;
 	String empRole;
 	String empEmail;
-	String Phone;
+	String phone;
 	
 	
 	
@@ -29,7 +30,7 @@ public class User {
 		this.empName = empName;
 		this.empRole = empRole;
 		this.empEmail = empEmail;
-		this.Phone = phone;
+		this.phone = phone;
 	}
 	
 	
@@ -59,10 +60,10 @@ public class User {
 		this.empEmail = empEmail;
 	}
 	public String getPhone() {
-		return Phone;
+		return phone;
 	}
 	public void setPhone(String phone) {
-		Phone = phone;
+		this.phone = phone;
 	}
 
 }
