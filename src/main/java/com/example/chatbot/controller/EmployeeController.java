@@ -58,6 +58,12 @@ public class EmployeeController {
 				msg = new Message("Chatbot", "Enter your location");
 				
 			}
+			
+			else if(question == "exit") {
+//				msg = new Message("Chatbot","Enter your email ID");
+//				empServ.endChatAndSendTranscript();
+				msg = new Message("Chatbot","Confirm if you want to exit");
+			}
 				
 			else {
 				msg = new Message("Chatbot", "Sorry... not able to get your prompt");
@@ -69,10 +75,12 @@ public class EmployeeController {
 				
 		}
 	
-	@GetMapping("chattranscript")
-	String getChatTranscript() {
-		if(question=="exit")
-			return empServ.endChatAndSendTranscript();
+	@GetMapping("/chattranscript/{email}")
+	String getChatTranscript(@PathVariable String email) {
+		if(question=="exit") {
+			empServ.endChatAndSendTranscript(email);
+			return "Chat Transcript has been delivered to your email";
+		}
 		else
 			return "Please end the chat first to get trancsript";
 	}

@@ -37,7 +37,7 @@ public class EmployeeService {
 		return chatMessages;
 	}
 	
-	public String endChatAndSendTranscript() {
+	public String endChatAndSendTranscript(String user_email) {
 		StringBuilder transcriptBuilder = new StringBuilder();
 		for(String msg : chatMessages) {
 			transcriptBuilder.append(msg).append("\n");
@@ -46,7 +46,7 @@ public class EmployeeService {
 		String transcript = transcriptBuilder.toString();
 		
 		
-		sendEmail("vasudevseth56@gmail.com","Chat Transcript",transcript);
+		sendEmail(user_email,"Chat Transcript",transcript);
 		
 		return transcript;
 	}

@@ -21,8 +21,6 @@ public class MenuController {
 	public ResponseEntity<Menu> getMenu(@PathVariable Integer id){
 		return ResponseEntity.ok(menuservice.getMenuById(id));
 	}
-	
-
 }
 
 

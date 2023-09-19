@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 public class User {
 	@Id
-	
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	String empName;
 	String empRole;
