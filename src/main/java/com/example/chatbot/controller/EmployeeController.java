@@ -32,7 +32,7 @@ public class EmployeeController {
 		
 		if(msg.getContent().contains("manager")) 
 			question = "manager";
-		else if(msg.getContent().contains(" IT help"))
+		else if(msg.getContent().contains(" it help"))
 			question = "IT";
 		else if(msg.getContent().contains("exit"))
 			question = "exit";
@@ -101,7 +101,7 @@ public class EmployeeController {
 			 msg = new Message("Chatbot", "wrong prompt");
 			
 		}
-		empServ.addMessage(new Message(username, empID.toString()));
+		empServ.addMessage(new Message(username,"Employee ID: " + empID.toString()));
 		empServ.addMessage(msg);
 		return msg;
 	}
@@ -122,7 +122,7 @@ public class EmployeeController {
 			 msg = new Message("Chatbot", "wrong prompt");
 			
 		}
-		empServ.addMessage(new Message(username,location));
+		empServ.addMessage(new Message(username,"Location: " + location));
 		empServ.addMessage(msg);
 		return msg;
 	}

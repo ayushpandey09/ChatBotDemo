@@ -43,6 +43,8 @@ public class EmployeeService {
 			transcriptBuilder.append(msg).append("\n");
 		}
 		
+		chatMessages.clear();
+		
 		String transcript = transcriptBuilder.toString();
 		
 		
