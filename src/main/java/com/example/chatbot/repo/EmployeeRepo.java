@@ -16,4 +16,12 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer>{
 	@Query(value = "select * from employees where location= :location and designation='IT support'", nativeQuery =true)
 	List<Employee> findIThelp(@Param("location") String location);
 	
+	@Query(value = "select * from employees where employee_id = :employeeId", nativeQuery =true)
+	List<Employee> findNwa(@Param("employeeId") Integer employee_id);
+	
+	 @Query(value = "SELECT COUNT(*) FROM employees WHERE employee_id = :empID", nativeQuery = true)
+	 int checkEmpIDExistence(@Param("empID") Integer empID);
+	 
+	 @Query(value = "SELECT COUNT(*) FROM employees WHERE location = :location", nativeQuery = true)
+	 int checkLocationExistence(@Param("location") String location);
 }

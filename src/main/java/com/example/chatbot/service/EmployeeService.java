@@ -68,5 +68,15 @@ public class EmployeeService {
 	public List<Employee> findIThelp(String location){
 		return empRepo.findIThelp(location);
 	}
+	public List<Employee> findNwaCode(Integer empId){
+		return empRepo.findNwa(empId);
+	}
+	public int checkEmpId(Integer empId){
+		return empRepo.checkEmpIDExistence(empId);
+	}
+	public int checkLocation(String location){
+		return empRepo.checkLocationExistence(location);
+	}
+	
 	
 }

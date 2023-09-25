@@ -34,6 +34,8 @@ public class EmployeeController {
 			question = "manager";
 		else if(msg.getContent().contains(" it help"))
 			question = "IT";
+		else if(msg.getContent().contains(" nwa "))
+			question = "nwa";
 		else if(msg.getContent().contains("exit"))
 			question = "exit";
 		else
@@ -47,16 +49,19 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/questionresponse")
-		Message getResponse() {
+	ResponseEntity<Message> getResponse() {
 		Message msg;
 			if(question == "manager" ) {
-				msg = new Message("Chatbot", "Enter your id number");
+				msg = new Message("Chatbot", "Enter your employee id");
 				
 			}
 				
 			else if(question == "IT") {
 				msg = new Message("Chatbot", "Enter your location");
 				
+			}
+			else if(question == "nwa") {
+				msg = new Message("Chatbot", "Enter your employee ID");
 			}
 			
 			else if(question == "exit") {
@@ -71,50 +76,62 @@ public class EmployeeController {
 			}
 			
 			empServ.addMessage(msg);
-			return msg;
+			return ResponseEntity.ok(msg);
 				
 		}
 	
-	@GetMapping("/chattranscript/{email}")
-	String getChatTranscript(@PathVariable String email) {
-		if(question=="exit") {
-			empServ.endChatAndSendTranscript(email);
-			return "Chat Transcript has been delivered to your email";
-		}
-		else
-			return "Please end the chat first to get trancsript";
-	}
+
 	
-		
-	@GetMapping("/questionmanager/{id}")
-	Message getId(@PathVariable("id") Integer empID) {
+	@GetMapping("/questionnwa/{id}")
+	ResponseEntity<Message> getNwa(@PathVariable("id") Integer empID) {
 		
 		Message msg;
-		if(question == "manager")
+	
+		if(empServ.checkEmpId(empID) != 0)
 		{
-			List<Employee> emp = empServ.findManagerByEmpId(empID);
-			 msg = new Message("Chatbot", emp.get(0).getEmp_name());
+			List<Employee> emp = empServ.findNwaCode(empID);
+			msg = new Message("Chatbot", "Your Nwa code : " + emp.get(0).getNwa_code());
 			
 		}
 		else
 		{
-			 msg = new Message("Chatbot", "wrong prompt");
+			 msg = new Message("Chatbot", "Invalid Employee ID!");
 			
 		}
 		empServ.addMessage(new Message(username,"Employee ID: " + empID.toString()));
 		empServ.addMessage(msg);
-		return msg;
+		return ResponseEntity.ok(msg);
+	}
+	
+	@GetMapping("/questionmanager/{id}")
+	ResponseEntity<Message> getId(@PathVariable("id") Integer empID) {
+		
+		Message msg;
+		if(empServ.checkEmpId(empID) != 0)
+		{
+			List<Employee> emp = empServ.findManagerByEmpId(empID);
+			 msg = new Message("Chatbot", emp.get(0).getEmp_name()+ "\n : " + emp.get(0).getEmail());
+			
+		}
+		else
+		{
+			 msg = new Message("Chatbot", "Invalid Employee ID!");
+			
+		}
+		empServ.addMessage(new Message(username,"Employee ID: " + empID.toString()));
+		empServ.addMessage(msg);
+		return ResponseEntity.ok(msg);
 	}
 	
 	@GetMapping("/questionithelp/{location}")
-	Message getId(@PathVariable("location") String location) {
+	ResponseEntity<Message> getId(@PathVariable("location") String location) {
 		
 		Message msg;
 		
-		if(question == "IT")
+		if(empServ.checkLocation(location) != 0)
 		{
 			List<Employee> emp = empServ.findIThelp(location);
-			 msg = new Message("Chatbot", emp.get(0).getEmp_name());
+			 msg = new Message("Chatbot", emp.get(0).getEmp_name() + "\n : " + emp.get(0).getEmail());
 			
 		}
 		else
@@ -124,7 +141,17 @@ public class EmployeeController {
 		}
 		empServ.addMessage(new Message(username,"Location: " + location));
 		empServ.addMessage(msg);
-		return msg;
+		return ResponseEntity.ok(msg);
+	}
+	
+	@GetMapping("/chattranscript/{email}")
+	String getChatTranscript(@PathVariable String email) {
+		if(question=="exit") {
+			empServ.endChatAndSendTranscript(email);
+			return "Chat Transcript has been delivered to your email";
+		}
+		else
+			return "Please end the chat first to get trancsript";
 	}
 	
 }

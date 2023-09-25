@@ -15,6 +15,7 @@ public class Employee {
 	private String email;
 	private String location;
 	private Integer manager_id;
+	private String nwa_code;
 	public Integer getEmployee_id() {
 		return employee_id;
 	}
@@ -52,7 +53,7 @@ public class Employee {
 		this.manager_id = manager_id;
 	}
 	public Employee(Integer employee_id, String emp_name, String designation, String email, String location,
-			Integer manager_id) {
+			Integer manager_id, String nwa_code) {
 		super();
 		this.employee_id = employee_id;
 		this.emp_name = emp_name;
@@ -60,9 +61,16 @@ public class Employee {
 		this.email = email;
 		this.location = location;
 		this.manager_id = manager_id;
+		this.nwa_code = nwa_code;
 	}
 	public Employee() {
 		super();
+	}
+	public String getNwa_code() {
+		return nwa_code;
+	}
+	public void setNwa_code(String nwa_code) {
+		this.nwa_code = nwa_code;
 	}
 	
 	
