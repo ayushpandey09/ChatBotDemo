@@ -20,7 +20,7 @@ public class UserController {
 	UserService userServ;
 	
 	
-	@PostMapping("/adduser")
+	@PostMapping("/user")
 	public ResponseEntity<User> createUser(@RequestBody User user ){
 		
 		userServ.createUser(user);
