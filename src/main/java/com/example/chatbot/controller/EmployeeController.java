@@ -67,11 +67,11 @@ public class EmployeeController {
 			else if(question == "exit") {
 //				msg = new Message("Chatbot","Enter your email ID");
 //				empServ.endChatAndSendTranscript();
-				msg = new Message("Chatbot","Confirm if you want to exit");
+				msg = new Message("Chatbot","Enter \"yes\" to confirm");
 			}
 				
 			else {
-				msg = new Message("Chatbot", "Sorry... not able to get your prompt");
+				msg = new Message("Chatbot", "Sorry, the prompt could not be recognised");
 				
 			}
 			
@@ -136,7 +136,7 @@ public class EmployeeController {
 		}
 		else
 		{
-			 msg = new Message("Chatbot", "wrong prompt");
+			 msg = new Message("Chatbot", "Please enter a valid prompt");
 			
 		}
 		empServ.addMessage(new Message(username,"Location: " + location));
